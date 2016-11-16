@@ -75,4 +75,10 @@ class BookTitle extends DB
         $STH->execute($arrData);
         Utility::redirect('index.php');
     }
+    public function delete(){
+        $sql = "DELETE FROM book_title WHERE id=".$this->id;
+        $STH = $this->DBH->prepare($sql);
+        $STH->execute();
+        Utility::redirect('index.php');
+    }
 }

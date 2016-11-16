@@ -96,7 +96,7 @@
         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                 <div class="list-group">
-                    <a href="views/SEIP143229/BookTitle/view.php" class="list-group-item active text-center">
+                    <a href="http://localhost/bitm_b35_ajit/ajitdas_143229_b33_session27_update_delete/views/SEIP143229/BookTitle/index.php" target="iframe_a" class="list-group-item active text-center">
                         <h4 class="glyphicon glyphicon-plane"></h4><br/>Flight
                     </a>
                     <a href="#" class="list-group-item text-center">
@@ -118,7 +118,9 @@
                 <div class="bhoechie-tab-content active">
                     <center>
                         <div>Book Title</div>
-                        <iframe src="localhost/bitm_b35_ajit/ajitdas_143229_b33_session26_read/views/SEIP143229/BookTitle/view.php"></iframe>
+
+                        <iframe height="300px" width="100%" src="http://localhost/bitm_b35_ajit/ajitdas_143229_b33_session27_update_delete/views/SEIP143229/BookTitle/index.php" name="iframe_a"></iframe>
+
                     </center>
                 </div>
                 <!-- train section -->
