@@ -36,6 +36,7 @@ foreach($allData as $oneData){
     echo "<td>
             <a href='view.php?id=$oneData->id'><button class='btn btn-info'>View</button></a>
             <a href='medit.php?id=$oneData->id'><button class='btn btn-primary'>Edit</button></a>
+            <a href='trash.php?id=$oneData->id'><button class='btn btn-primary'>Trash</button></a>
             <a href='delete.php?id=$oneData->id'><button class='btn btn-danger'>Delete</button></a>
 </td>";
     echo "</tr>";

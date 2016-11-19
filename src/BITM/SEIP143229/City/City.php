@@ -10,6 +10,7 @@ namespace App\City;
 use App\Model\database as DB;
 use App\Message\Message;
 use App\Utility\Utility;
+use PDO;
 
 class City extends DB
 {
@@ -21,9 +22,7 @@ class City extends DB
 
         parent::__construct();
     }
-    public function index(){
-        echo "Cities will go here";
-    }
+
     public function setData($postVaribaleData = NULL)
     {
         if (array_key_exists('id', $postVaribaleData)) {
@@ -52,4 +51,52 @@ class City extends DB
             Message::setMessage("Failed ! Data has not been inserted Successfully ):");
         Utility::redirect('create.php');
     }
+
+    public function index($fetchMode='ASSOC'){
+        $STH = $this->DBH->query("SELECT * from city WHERE is_deleted='No'");
+        $fetchMode = strtoupper($fetchMode);
+        if(substr_count($fetchMode, 'OBJ') > 0)
+            $STH->setFetchMode(PDO::FETCH_OBJ);
+        else
+            $STH->setFetchMode(PDO::FETCH_ASSOC);
+        $arrAllData = $STH->fetchAll();
+        return $arrAllData;
+    }//end of index();
+    public function view($fetchMode='ASSOC'){
+        $STH = $this->DBH->query('SELECT * from city where id='.$this->id);
+        $fetchMode = strtoupper($fetchMode);
+        if(substr_count($fetchMode,'OBJ') > 0)
+            $STH->setFetchMode(PDO::FETCH_OBJ);
+        else
+            $STH->setFetchMode(PDO::FETCH_ASSOC);
+        $arrOneData = $STH->fetch();
+        return $arrOneData;
+    }//end of view();
+
+    public function update(){
+        $arrData = array($this->name, $this->city);
+        $sql = "UPDATE city set name=?, city=? WHERE id=".$this->id;
+        $STH = $this->DBH->prepare($sql);
+        $STH->execute($arrData);
+        Utility::redirect('index.php');
+    }
+    public function delete(){
+        $sql='DELETE FROM city WHERE id = '.$this->id;
+        $STH = $this->DBH->prepare($sql);
+
+
+        $result = $STH->execute();
+
+        Utility::redirect('index.php');
+
+
+
+    }
+    public function trash($fetchMode ='ASSOC'){
+        $query = "UPDATE city SET is_deleted=NOW() Where id=".$this->id;
+        $stmt = $this->DBH->prepare($query);
+        $stmt->execute();
+        Utility::redirect('index.php');
+    }
+
 }

@@ -2,6 +2,12 @@
 require_once("../../../vendor/autoload.php");
 use App\Message\Message;
 if(!isset($_SESSION)) session_start();
+use App\Gender\Gender;
+$bokObject = new Gender();
+$bokObject->setData($_GET);
+$oneData = $bokObject->view("obj");
+//var_dump($oneData); die();
+
 
 ?>
 <!DOCTYPE html>
@@ -33,36 +39,36 @@ if(!isset($_SESSION)) session_start();
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../resources/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../resources/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../../../resources/assets/ico/apple-touch-icon-57-precomposed.png">
-   
+
 </head>
 <body>
 <!-- Top content -->
 <div class="top-content">
-     <div class="container">
+    <div class="container">
         <div class="row">
-           <div id="almessage"> <?php echo Message::getMessage(); ?></div>
+            <div id="almessage"> <?php echo Message::getMessage(); ?></div>
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3>Organization Summary</h3>
-                        <p>Enter your Organization Name and Summary:</p>
+                        <h3>Gender</h3>
+                        <p>Enter your Name and Gender:</p>
                     </div>
                     <div class="form-top-right">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-book"></i>
                     </div>
                 </div>
                 <div class="form-bottom">
-                    <form role="form" action="store.php" method="post" class="login-form">
+                    <form role="form" action="update.php" method="post" class="login-form">
+                        <input type="hidden" name="id" value="<?php echo $oneData->id; ?>">
                         <div class="form-group">
-                            <label class="sr-only" for="form-booktitle">Company Name</label>
-                            <input type="text" name="company_name" placeholder="Enter Your Company Name ..." class="form-booktitle form-control" id="form-booktitle">
+                            <label class="sr-only" for="form-booktitle">Book Title</label>
+                            <input type="text" name="your_name" value="<?php echo $oneData->name; ?>" class="form-booktitle form-control" id="form-booktitle">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="organization-summary">Organization Summary</label>
-                            <textarea class="form-control" name="summary" placeholder="Author Name..." rows="5" id="organization-summary"></textarea>
-
+                            <label class="sr-only" for="form-author">Author Name</label>
+                            <input type="text" name="gender" value="<?php echo $oneData->gender; ?>" class="form-author form-control" id="form-author">
                         </div>
-                        <button type="submit" class="btn">Create!</button>
+                        <button type="submit" class="btn">Update!</button>
                     </form>
                 </div>
             </div>
@@ -74,18 +80,18 @@ if(!isset($_SESSION)) session_start();
 <script src="../../../resources/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../../resources/assets/js/jquery.backstretch.min.js"></script>
 <script src="../../../resources/assets/js/scripts.js"></script>
- <script type="text/javascript">
+<script type="text/javascript">
 
-            $(function(){
-				setTimeout(function(){
-					$("#almessage").fadeOut('Slow')
-				}, 5000);
-			});
+    $(function(){
+        setTimeout(function(){
+            $("#almessage").fadeOut('Slow')
+        }, 5000);
+    });
 
-    </script>
+</script>
 
 <!--[if lt IE 10]>
-<script src="../../../resources/assetsjs/placeholder.js"></script>
+<script src="../../../resources/assets/js/placeholder.js"></script>
 <![endif]-->
 
 </body>

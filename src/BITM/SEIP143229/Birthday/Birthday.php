@@ -10,7 +10,8 @@ namespace App\Birthday;
 use App\Message\Message;
 use App\Model\Database as DB;
 use App\Utility\Utility;
-
+use PDO;
+use PDOException;
 class Birthday extends DB
 {
     public $id="";
@@ -20,9 +21,6 @@ class Birthday extends DB
     public function __construct(){
 
         parent::__construct();
-    }
-    public function index(){
-        echo "Birthdays will go here";
     }
 	 public function setData($postVaribaleData = NULL)
     {
@@ -36,7 +34,6 @@ class Birthday extends DB
             $this->birthday = $postVaribaleData['your_birthday'];
         }
     }
-
     public function store()
     {
         $arrData = array($this->name, $this->birthday);
@@ -52,4 +49,44 @@ class Birthday extends DB
             Message::setMessage("Failed ! Data has not been inserted Successfully ):");
         Utility::redirect('create.php');
 	}
+    public function index($fetchMode='ASSOC'){
+        $STH = $this->DBH->query("SELECT * from birthday WHERE is_deleted='No'");
+        $fetchMode = strtoupper($fetchMode);
+        if(substr_count($fetchMode, 'OBJ') > 0)
+            $STH->setFetchMode(PDO::FETCH_OBJ);
+        else
+            $STH->setFetchMode(PDO::FETCH_ASSOC);
+        $arrAllData = $STH->fetchAll();
+        return $arrAllData;
+    }//end of index();
+    public function view($fetchMode='ASSOC'){
+        $STH = $this->DBH->query('SELECT * from birthday where id='.$this->id);
+        $fetchMode = strtoupper($fetchMode);
+        if(substr_count($fetchMode,'OBJ') > 0)
+            $STH->setFetchMode(PDO::FETCH_OBJ);
+        else
+            $STH->setFetchMode(PDO::FETCH_ASSOC);
+        $arrOneData = $STH->fetch();
+        return $arrOneData;
+    }//end of view();
+
+    public function update(){
+        $arrData = array($this->name, $this->birthday);
+        $sql = "UPDATE birthday SET name=?, birthday=? WHERE id=".$this->id;
+        $STH = $this->DBH->prepare($sql);
+        $STH->execute($arrData);
+        Utility::redirect('index.php');
+    }
+    public function delete(){
+        $sql='DELETE FROM birthday WHERE id ='.$this->id;
+        $STH = $this->DBH->prepare($sql);
+        $STH->execute();
+        Utility::redirect('index.php');
+    }
+    public function trash($fetchMode ='ASSOC'){
+        $query = "UPDATE birthday SET is_deleted=NOW() Where id=".$this->id;
+        $stmt = $this->DBH->prepare($query);
+        $stmt->execute();
+        Utility::redirect('index.php');
+    }
 }

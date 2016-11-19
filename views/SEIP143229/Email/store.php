@@ -2,9 +2,9 @@
 include_once('../../../vendor/autoload.php');
 use App\Email\Email;
 
-$objEmail = new Email();
+$emailObject = new Email();
 
-$objEmail->setData($_POST);
+$emailObject->setData($_POST);
 
 
-$objEmail->store();
+$emailObject->store();

@@ -48,7 +48,7 @@ class BookTitle extends DB
     }//end of store
 
     public function index($fetchMode='ASSOC'){
-        $STH = $this->DBH->query('SELECT * from book_title');
+        $STH = $this->DBH->query("SELECT * from book_title WHERE is_deleted='No'");
         $fetchMode = strtoupper($fetchMode);
         if(substr_count($fetchMode, 'OBJ') > 0)
             $STH->setFetchMode(PDO::FETCH_OBJ);
@@ -76,9 +76,21 @@ class BookTitle extends DB
         Utility::redirect('index.php');
     }
     public function delete(){
-        $sql = "DELETE FROM book_title WHERE id=".$this->id;
+        $sql='DELETE FROM book_title WHERE id = '.$this->id;
         $STH = $this->DBH->prepare($sql);
-        $STH->execute();
+
+
+        $result = $STH->execute();
+
         Utility::redirect('index.php');
+
+
+
+    }
+    public function trash($fetchMode ='ASSOC'){
+            $query = "UPDATE book_title SET is_deleted=NOW() Where id=".$this->id;
+            $stmt = $this->DBH->prepare($query);
+            $stmt->execute();
+            Utility::redirect('index.php');
     }
 }
