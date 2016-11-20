@@ -2,13 +2,11 @@
 require_once("../../../vendor/autoload.php");
 use App\Message\Message;
 if(!isset($_SESSION)) session_start();
-use App\BookTitle\BookTitle;
-$bokObject = new BookTitle();
+use App\Hobbies\Hobbies;
+$bokObject = new Hobbies();
 $bokObject->setData($_GET);
 $oneData = $bokObject->view("obj");
 //var_dump($oneData); die();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +17,6 @@ $oneData = $bokObject->view("obj");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Login Form Template</title>
-
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="../../../resources/assets/bootstrap/css/bootstrap.min.css">
@@ -50,8 +47,8 @@ $oneData = $bokObject->view("obj");
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="form-top">
                     <div class="form-top-left">
-                        <h3>Book Title</h3>
-                        <p>Enter your Book Title and Author Name:</p>
+                        <h3>Hobbies</h3>
+                        <p>Enter your Name and Hobbies:</p>
                     </div>
                     <div class="form-top-right">
                         <i class="fa fa-book"></i>
@@ -61,12 +58,15 @@ $oneData = $bokObject->view("obj");
                     <form role="form" action="update.php" method="post" class="login-form">
                         <input type="hidden" name="id" value="<?php echo $oneData->id; ?>">
                         <div class="form-group">
-                            <label class="sr-only" for="form-booktitle">Book Title</label>
-                            <input type="text" name="book_title" value="<?php echo $oneData->booktitle; ?>" class="form-booktitle form-control" id="form-booktitle">
+                            <label class="sr-only" for="form-booktitle">Your Name</label>
+                            <input type="text" name="your_name" value="<?php echo $oneData->name; ?>" class="form-booktitle form-control" id="form-booktitle">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="form-author">Author Name</label>
-                            <input type="text" name="author_name" value="<?php echo $oneData->author; ?>" class="form-author form-control" id="form-author">
+                            <label for="hobbies" >Select Your Hobbies</label><br>
+                            <input type="checkbox" name="hobby[]" value="reading" id="hobbies" <?php if(in_array('reading', explode(',', $oneData->hobbies))) echo "checked"; ?>> Reading<br>
+                            <input type="checkbox" name="hobby[]" value="writing" id="hobbies" <?php if(in_array('writing', explode(',', $oneData->hobbies))) echo "checked"; ?>> Writing<br>
+                            <input type="checkbox" name="hobby[]" value="playing" id="hobbies" <?php if(in_array('playing', explode(',', $oneData->hobbies))) echo "checked"; ?>> Playing<br>
+                            <input type="checkbox" name="hobby[]" value="swimming" id="hobbies" <?php if(in_array('swimming', explode(',', $oneData->hobbies))) echo "checked"; ?>> Swimming<br>
                         </div>
                         <button type="submit" class="btn">Update!</button>
                     </form>
@@ -89,7 +89,6 @@ $oneData = $bokObject->view("obj");
     });
 
 </script>
-
 <!--[if lt IE 10]>
 <script src="../../../resources/assets/js/placeholder.js"></script>
 <![endif]-->
