@@ -93,10 +93,10 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-8 col-xs-9 bhoechie-tab-container">
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 bhoechie-tab-container">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
                 <div class="list-group">
-                    <a href="http://localhost/bitm_b35_ajit/ajitdas_143229_b33_session27_update_delete/views/SEIP143229/BookTitle/index.php" target="iframe_a" class="list-group-item active text-center">
+                    <a href="http://localhost/bitm/ajitdas_143229_b35_session27_update_delete/views/SEIP143229/BookTitle/index.php" target="iframe_a" class="list-group-item active text-center">
                         <h4 class="glyphicon glyphicon-plane"></h4><br/>Flight
                     </a>
                     <a href="#" class="list-group-item text-center">
@@ -118,9 +118,7 @@
                 <div class="bhoechie-tab-content active">
                     <center>
                         <div>Book Title</div>
-
-                        <iframe height="300px" width="100%" src="http://localhost/bitm_b35_ajit/ajitdas_143229_b33_session27_update_delete/views/SEIP143229/BookTitle/index.php" name="iframe_a"></iframe>
-
+                        <iframe height="500px" width="100%" src="http://localhost/bitm/ajitdas_143229_b35_session27_update_delete/views/SEIP143229/BookTitle/index.php" name="iframe_a"></iframe>
                     </center>
                 </div>
                 <!-- train section -->
@@ -131,7 +129,6 @@
                         <h3 style="margin-top: 0;color:#55518a">Train Reservation</h3>
                     </center>
                 </div>
-
                 <!-- hotel search -->
                 <div class="bhoechie-tab-content">
                     <center>
